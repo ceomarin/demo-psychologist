@@ -11,7 +11,7 @@ export const profesional = {
     titulo: "Psicóloga Clínica",
     universidad: "Universidad Academia de Humanismo Cristiano",
     metodo: "Sistémico",
-    foto: "/demo-psychologist/src/images/profesional.jpg",
+    foto: "/demo-psychologist/images/profesional.jpg",
     // codigoSUP: se omite intencionalmente por privacidad del template
 
     // ── MODALIDAD DE ATENCIÓN ──────────────────────────────────
