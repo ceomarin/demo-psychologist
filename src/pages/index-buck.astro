@@ -1,0 +1,135 @@
+---
+import Layout from "../layouts/Layout.astro";
+import WhatsAppButton from "../components/WhatsAppButton.astro";
+import { profesional } from "../config/profesional";
+---
+
+<Layout title={`${profesional.nombre} — ${profesional.titulo} en Santiago`} description={profesional.descripcionSEO}>
+	<!-- HERO -->
+	<section class="min-h-screen flex flex-col justify-center items-center text-center px-6" style="background-color: #FDF8F3;">
+		<p class="text-sm font-semibold tracking-widest uppercase mb-5" style="color: #7C6BA0;">
+			{profesional.titulo} · Santiago
+		</p>
+		<h1 class="text-4xl md:text-5xl font-bold mb-6 leading-tight" style="color: #2D2535;">
+			Un espacio seguro<br />para tu proceso
+		</h1>
+		<p class="text-lg max-w-xl mb-10 leading-relaxed" style="color: #6B6475;">
+			{profesional.bio.slice(0, 160)}...
+		</p>
+
+		<div class="flex flex-col sm:flex-row gap-4 items-center">
+			<a href={profesional.urlParticular} class="px-8 py-3 rounded-full text-base font-semibold text-white transition-opacity hover:opacity-90" style="background-color: #7C6BA0;">Agendar sesión particular</a>
+			{
+				profesional.fonasaActivo && (
+					<a href={profesional.urlFonasa} class="px-8 py-3 rounded-full text-base font-semibold border-2 transition-colors" style="border-color: #7C6BA0; color: #7C6BA0;">
+						Agendar sesión Fonasa
+					</a>
+				)
+			}
+		</div>
+
+		{
+			profesional.fonasaActivo && (
+				<p class="mt-5 text-sm" style="color: #9D93A8;">
+					Atención disponible por Fonasa · Modalidad libre elección
+				</p>
+			)
+		}
+	</section>
+
+	<!-- MODALIDADES -->
+	<section id="servicios" class="py-24 px-6 bg-white">
+		<div class="max-w-4xl mx-auto">
+			<h2 class="text-3xl font-bold text-center mb-4" style="color: #2D2535;">Modalidades de atención</h2>
+			<p class="text-center mb-14" style="color: #6B6475;">Atención personalizada según tu momento vital</p>
+			<div class={`grid gap-8 ${profesional.modalidades.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
+				{
+					profesional.modalidades.map((m) => (
+						<div class="rounded-2xl p-8 shadow-sm" style="background-color: #FDF8F3;">
+							<div class="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style="background-color: #EDE8F5;">
+								<svg class="w-5 h-5" style="color: #7C6BA0;" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+								</svg>
+							</div>
+							<h3 class="text-lg font-semibold mb-2" style="color: #2D2535;">
+								{m.titulo}
+							</h3>
+							<p class="text-sm leading-relaxed" style="color: #6B6475;">
+								{m.descripcion}
+							</p>
+						</div>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- ESPECIALIDADES -->
+	<section id="especialidades" class="py-24 px-6" style="background-color: #F3F0F8;">
+		<div class="max-w-3xl mx-auto text-center">
+			<h2 class="text-3xl font-bold mb-10" style="color: #2D2535;">Especialidades</h2>
+			<div class="flex flex-wrap justify-center gap-3">
+				{
+					profesional.especialidades.map((e) => (
+						<span class="px-4 py-2 rounded-full text-sm font-medium" style="background-color: #EDE8F5; color: #7C6BA0;">
+							{e}
+						</span>
+					))
+				}
+			</div>
+		</div>
+	</section>
+
+	<!-- SOBRE MÍ -->
+	<section id="sobre-mi" class="py-24 px-6 bg-white">
+		<div class="max-w-3xl mx-auto">
+			<h2 class="text-3xl font-bold mb-6 text-center" style="color: #2D2535;">Sobre mí</h2>
+			<p class="text-lg leading-relaxed mb-10 text-center" style="color: #4A4255;">
+				{profesional.bio}
+			</p>
+
+			<h3 class="text-xl font-semibold mb-4" style="color: #2D2535;">Formación</h3>
+			<ul class="flex flex-col gap-2">
+				{
+					profesional.formacion.map((f) => (
+						<li class="flex items-start gap-3">
+							<span class="mt-1 w-2 h-2 rounded-full flex-shrink-0" style="background-color: #7C6BA0;" />
+							<span style="color: #4A4255;">{f}</span>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+
+	<!-- CONTACTO -->
+	<section id="contacto" class="py-24 px-6" style="background-color: #FDF8F3;">
+		<div class="max-w-xl mx-auto">
+			<h2 class="text-3xl font-bold text-center mb-4" style="color: #2D2535;">Escríbeme</h2>
+			<p class="text-center mb-12" style="color: #6B6475;">Te respondo dentro de 24 horas hábiles</p>
+			<form action="https://api.web3forms.com/submit" method="POST" class="flex flex-col gap-4">
+				<input type="hidden" name="access_key" value="TU_ACCESS_KEY_AQUI" />
+				<input type="hidden" name="subject" value={`Nuevo contacto — ${profesional.nombre}`} />
+				<input type="text" name="botcheck" class="hidden" aria-hidden="true" />
+
+				<input type="text" name="name" placeholder="Tu nombre" required class="border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 bg-white" style="border-color: #D5CCE8; color: #2D2535;" />
+				<input type="email" name="email" placeholder="Tu correo" required class="border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 bg-white" style="border-color: #D5CCE8; color: #2D2535;" />
+				<textarea name="message" placeholder="¿En qué puedo ayudarte?" rows="4" required class="border rounded-xl px-4 py-3 focus:outline-none focus:ring-2 resize-none bg-white" style="border-color: #D5CCE8; color: #2D2535;"></textarea>
+				<p class="text-xs" style="color: #9D93A8;">
+					Al enviar aceptas nuestra
+					<a href={`${import.meta.env.BASE_URL}privacidad`} class="underline" style="color: #7C6BA0;">política de privacidad</a>.
+				</p>
+				<button type="submit" class="py-3 rounded-full font-semibold text-white transition-opacity hover:opacity-90" style="background-color: #7C6BA0;">Enviar mensaje</button>
+			</form>
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="py-8 px-6 text-center" style="background-color: #2D2535;">
+		<p class="text-sm" style="color: #9D93A8;">
+			© 2025 {profesional.nombre} · {profesional.titulo} · Santiago de Chile
+		</p>
+	</footer>
+
+	<WhatsAppButton phone={profesional.whatsapp} />
+</Layout>

@@ -1,0 +1,86 @@
+---
+import { profesional } from "../data/profesional";
+
+const whatsappUrl = `https://wa.me/${profesional.whatsapp}?text=${encodeURIComponent(profesional.whatsappMensaje)}`;
+const esPresencial = profesional.modalidadAtencion === "presencial" || profesional.modalidadAtencion === "ambas";
+const esOnline = profesional.modalidadAtencion === "online" || profesional.modalidadAtencion === "ambas";
+
+const etiquetaModalidad = profesional.modalidadAtencion === "presencial" ? "Presencial" : profesional.modalidadAtencion === "online" ? "Online" : "Presencial y online";
+---
+
+<section id="servicios" class="py-24 bg-white">
+    <div class="max-w-5xl mx-auto px-6">
+        <!-- Encabezado -->
+        <div class="text-center mb-14">
+            <p class="text-teal-700 font-medium tracking-widest uppercase text-sm mb-3">Servicios</p>
+            <h2 class="text-4xl font-bold text-gray-800 leading-tight mb-4">¿En qué puedo ayudarte?</h2>
+            <p class="text-gray-500 max-w-xl mx-auto">
+                Ofrezco acompañamiento psicológico adaptado a tus necesidades,
+                {esPresencial && esOnline && "tanto de forma presencial como online."}
+                {esPresencial && !esOnline && "de forma presencial en consulta."}
+                {esOnline && !esPresencial && "de forma completamente online."}
+            </p>
+        </div>
+
+        <!-- Cards de modalidades -->
+        <div class="grid md:grid-cols-2 gap-6 mb-14">
+            {
+                profesional.modalidades.map((servicio) => (
+                    <div class="border border-gray-100 rounded-2xl p-8 hover:shadow-lg transition-opacity hover:opacity-90">
+                        <div class="text-4xl mb-4">{servicio.icono}</div>
+                        <h3 class="text-xl font-semibold text-gray-800 mb-2">{servicio.titulo}</h3>
+                        <p class="text-gray-500 leading-relaxed mb-4">{servicio.descripcion}</p>
+                        <div class="flex flex-wrap gap-3 text-sm text-teal-700">
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </svg>
+                                {servicio.duracion}
+                            </span>
+                            <span class="flex items-center gap-1">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                </svg>
+                                {etiquetaModalidad}
+                            </span>
+                        </div>
+                    </div>
+                ))
+            }
+        </div>
+
+        <!-- Especialidades -->
+        <div class="bg-teal-50 rounded-2xl p-8 mb-14">
+            <h3 class="text-lg font-semibold text-gray-800 mb-5 text-center">Áreas de especialidad</h3>
+            <div class="flex flex-wrap gap-3 justify-center">
+                {profesional.especialidades.map((esp) => <span class="bg-white text-teal-700 border border-teal-200 px-4 py-2 rounded-full text-sm font-medium">{esp}</span>)}
+            </div>
+        </div>
+
+        <!-- Fonasa / Particular -->
+        <div class="text-center">
+            {
+                profesional.fonasaActivo ? (
+                    <div>
+                        <p class="text-gray-500 mb-6">Atendo por Fonasa y de forma particular.</p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href={profesional.urlFonasa} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors">
+                                Agendar con Fonasa
+                            </a>
+                            <a href={profesional.urlParticular} class="border-2 border-teal-700 text-teal-700 px-8 py-3 rounded-full font-semibold hover:bg-teal-50 transition-colors">
+                                Agendar particular
+                            </a>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        <p class="text-gray-500 mb-6">¿Tienes dudas? Escríbeme y conversamos sin compromiso.</p>
+                        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors">
+                            Consultar por WhatsApp
+                        </a>
+                    </div>
+                )
+            }
+        </div>
+    </div>
+</section>

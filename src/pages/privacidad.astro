@@ -1,0 +1,140 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { profesional } from "../config/profesional";
+---
+
+<Layout
+    title={`Política de Privacidad — ${profesional.nombre}`}
+    description="Política de privacidad y tratamiento de datos personales conforme a la Ley 21.719 de Chile."
+>
+    <main class="max-w-3xl mx-auto px-6 py-20">
+        <a
+            href={import.meta.env.BASE_URL}
+            class="inline-flex items-center gap-2 text-sm mb-10 hover:opacity-70 transition-opacity"
+            style="color: #7C6BA0;"
+        >
+            <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                viewBox="0 0 24 24"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M15 19l-7-7 7-7"></path>
+            </svg>
+            Volver al inicio
+        </a>
+
+        <h1 class="text-3xl font-bold mb-2" style="color: #2D2535;">
+            Política de Privacidad
+        </h1>
+        <p class="text-sm mb-12" style="color: #9D93A8;">
+            Última actualización: enero 2025
+        </p>
+
+        <div class="flex flex-col gap-10" style="color: #4A4255;">
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    1. Responsable del tratamiento
+                </h2>
+                <p class="leading-relaxed">
+                    {profesional.nombre}, {profesional.titulo}, RUT {
+                        profesional.rutProfesional
+                    }, con domicilio en {profesional.direccion}. Correo de
+                    contacto:
+                    <a
+                        href={`mailto:${profesional.emailPrivacidad}`}
+                        class="underline"
+                        style="color: #7C6BA0;"
+                    >
+                        {profesional.emailPrivacidad}
+                    </a>
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    2. Datos que recopilamos
+                </h2>
+                <p class="leading-relaxed">
+                    A través del formulario de contacto recopilamos nombre,
+                    correo electrónico y el mensaje que nos envías. No
+                    recopilamos datos sensibles de salud a través de este
+                    formulario.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    3. Finalidad del tratamiento
+                </h2>
+                <p class="leading-relaxed">
+                    Los datos recopilados se usan exclusivamente para responder
+                    tu consulta y, si corresponde, coordinar una sesión. No
+                    utilizamos tus datos para fines comerciales ni los cedemos a
+                    terceros.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    4. Base legal
+                </h2>
+                <p class="leading-relaxed">
+                    El tratamiento se realiza con tu consentimiento expreso al
+                    enviar el formulario de contacto, conforme a lo establecido
+                    en la Ley N° 21.719 sobre Protección de Datos Personales de
+                    Chile.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    5. Almacenamiento
+                </h2>
+                <p class="leading-relaxed">
+                    Los mensajes son recibidos a través de Web3Forms y
+                    almacenados en el correo del responsable. No mantenemos una
+                    base de datos propia de contactos.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    6. Tus derechos
+                </h2>
+                <p class="leading-relaxed">
+                    Conforme a la Ley 21.719, tienes derecho a acceder,
+                    rectificar, cancelar u oponerte al tratamiento de tus datos.
+                    Para ejercer estos derechos escríbenos a
+                    <a
+                        href={`mailto:${profesional.emailPrivacidad}`}
+                        class="underline"
+                        style="color: #7C6BA0;"
+                    >
+                        {profesional.emailPrivacidad}
+                    </a>.
+                </p>
+            </div>
+
+            <div>
+                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
+                    7. Cookies
+                </h2>
+                <p class="leading-relaxed">
+                    Este sitio no utiliza cookies de seguimiento ni herramientas
+                    de analítica de terceros.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="py-8 px-6 text-center" style="background-color: #2D2535;">
+        <p class="text-sm" style="color: #9D93A8;">
+            © 2025 {profesional.nombre} · {profesional.titulo} · Santiago de Chile
+        </p>
+    </footer>
+</Layout>
