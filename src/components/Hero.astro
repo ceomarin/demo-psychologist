@@ -6,53 +6,50 @@ const esPresencial = profesional.modalidadAtencion === "presencial" || profesion
 const esOnline = profesional.modalidadAtencion === "online" || profesional.modalidadAtencion === "ambas";
 ---
 
-<section id="inicio" class="min-h-screen flex items-center bg-gradient-to-br from-teal-50 to-white py-20">
+<section id="inicio" data-testid="hero" class="min-h-screen flex items-center bg-gradient-to-br from-teal-50 to-white py-20">
     <div class="max-w-5xl mx-auto px-6 flex flex-col md:flex-row items-center gap-12">
-        <!-- Texto -->
         <div class="flex-1 text-center md:text-left">
-            <p class="text-teal-700 font-medium tracking-widest uppercase text-sm mb-4">
+            <p data-testid="hero-titulo" class="text-teal-700 font-medium tracking-widest uppercase text-sm mb-4">
                 {profesional.titulo}
             </p>
 
-            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">
+            <h1 data-testid="hero-nombre" class="text-4xl md:text-5xl font-bold text-gray-800 leading-tight mb-4">
                 {profesional.nombre}
             </h1>
 
-            <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            <p data-testid="hero-metodo" class="text-lg text-gray-600 leading-relaxed mb-6">
                 {profesional.metodo}
             </p>
 
-            <p class="text-base text-gray-500 leading-relaxed mb-10 max-w-xl">
+            <p data-testid="hero-bio" class="text-base text-gray-500 leading-relaxed mb-10 max-w-xl">
                 {profesional.bio}
             </p>
 
-            <!-- Botones -->
             <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                 {
                     profesional.fonasaActivo ? (
                         <div class="flex flex-col sm:flex-row gap-3">
-                            <a href={profesional.urlFonasa} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors text-center">
+                            <a data-testid="hero-boton-fonasa" href={profesional.urlFonasa} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors text-center">
                                 Agendar con Fonasa
                             </a>
-                            <a href={profesional.urlParticular} class="border-2 border-teal-700 text-teal-700 px-8 py-3 rounded-full font-semibold hover:bg-teal-50 transition-colors text-center">
+                            <a data-testid="hero-boton-particular" href={profesional.urlParticular} class="border-2 border-teal-700 text-teal-700 px-8 py-3 rounded-full font-semibold hover:bg-teal-50 transition-colors text-center">
                                 Agendar particular
                             </a>
                         </div>
                     ) : (
-                        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors text-center">
+                        <a data-testid="hero-boton-agendar" href={whatsappUrl} target="_blank" rel="noopener noreferrer" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors text-center">
                             Agendar una consulta
                         </a>
                     )
                 }
 
-                <a href="#servicios" class="border-2 border-teal-700 text-teal-700 px-8 py-3 rounded-full font-semibold hover:bg-teal-50 transition-colors text-center">Ver servicios</a>
+                <a data-testid="hero-boton-servicios" href="#servicios" class="border-2 border-teal-700 text-teal-700 px-8 py-3 rounded-full font-semibold hover:bg-teal-50 transition-colors text-center">Ver servicios</a>
             </div>
 
-            <!-- Datos rápidos -->
-            <div class="flex flex-wrap gap-6 mt-10 justify-center md:justify-start text-sm text-gray-500">
+            <div data-testid="hero-datos-rapidos" class="flex flex-wrap gap-6 mt-10 justify-center md:justify-start text-sm text-gray-500">
                 {
                     esPresencial && (
-                        <span class="flex items-center gap-2">
+                        <span data-testid="hero-direccion" class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
@@ -64,7 +61,7 @@ const esOnline = profesional.modalidadAtencion === "online" || profesional.modal
 
                 {
                     esOnline && (
-                        <span class="flex items-center gap-2">
+                        <span data-testid="hero-online" class="flex items-center gap-2">
                             <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
@@ -73,7 +70,7 @@ const esOnline = profesional.modalidadAtencion === "online" || profesional.modal
                     )
                 }
 
-                <span class="flex items-center gap-2">
+                <span data-testid="hero-universidad" class="flex items-center gap-2">
                     <svg class="w-4 h-4 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"></path>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422A12.083 12.083 0 0112 21.5a12.083 12.083 0 01-6.16-8.922L12 14z"></path>
@@ -83,9 +80,8 @@ const esOnline = profesional.modalidadAtencion === "online" || profesional.modal
             </div>
         </div>
 
-        <!-- Foto -->
         <div class="flex-shrink-0">
-            <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-lg bg-teal-100">
+            <div data-testid="hero-foto" class="w-64 h-64 md:w-80 md:h-80 rounded-2xl overflow-hidden shadow-lg bg-teal-100">
                 <img src={profesional.foto} alt={`Foto de ${profesional.nombre}`} class="w-full h-full object-cover" onerror="this.style.display='none'" />
             </div>
         </div>

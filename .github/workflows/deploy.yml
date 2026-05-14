@@ -27,11 +27,53 @@ jobs:
           node-version: 22
           cache: npm
 
+      - name: Log — Inicio del build
+        run: |
+          echo "=================================================="
+          echo "INICIO DEL BUILD"
+          echo "=================================================="
+          echo "Fecha y hora     : $(date '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "Repositorio      : ${{ github.repository }}"
+          echo "Branch           : ${{ github.ref_name }}"
+          echo "Commit           : ${{ github.sha }}"
+          echo "Autor del commit : ${{ github.actor }}"
+          echo "Node version     : $(node --version)"
+          echo "npm version      : $(npm --version)"
+          echo "=================================================="
+
       - name: Instalar dependencias
         run: npm ci
 
+      - name: Log — Dependencias instaladas
+        run: |
+          echo "=================================================="
+          echo "DEPENDENCIAS"
+          echo "=================================================="
+          echo "Paquetes instalados: $(ls node_modules | wc -l)"
+          echo "Astro version      : $(node -e "console.log(require('./node_modules/astro/package.json').version)")"
+          echo "=================================================="
+
       - name: Build
-        run: npm run build
+        run: |
+          START=$(date +%s)
+          npm run build
+          END=$(date +%s)
+          echo "BUILD_TIME=$((END - START))" >> $GITHUB_ENV
+
+      - name: Log — Resultado del build
+        run: |
+          echo "=================================================="
+          echo "RESULTADO DEL BUILD"
+          echo "=================================================="
+          echo "Tiempo de build  : ${{ env.BUILD_TIME }} segundos"
+          echo "Archivos en dist/:"
+          find dist/ -type f | wc -l
+          echo "Tamaño total     :"
+          du -sh dist/
+          echo "Archivos HTML    : $(find dist/ -name '*.html' | wc -l)"
+          echo "Archivos CSS     : $(find dist/ -name '*.css' | wc -l)"
+          echo "Archivos JS      : $(find dist/ -name '*.js' | wc -l)"
+          echo "=================================================="
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
@@ -48,3 +90,24 @@ jobs:
       - name: Deploy a GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Log — Deploy completado
+        run: |
+          echo "=================================================="
+          echo "DEPLOY COMPLETADO"
+          echo "=================================================="
+          echo "URL del sitio    : ${{ steps.deployment.outputs.page_url }}"
+          echo "Fecha y hora     : $(date '+%Y-%m-%d %H:%M:%S UTC')"
+          echo "Estado           : EXITOSO ✓"
+          echo "=================================================="
+
+      - name: Resumen en GitHub Summary
+        run: |
+          echo "## ✅ Deploy exitoso" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "| Campo | Valor |" >> $GITHUB_STEP_SUMMARY
+          echo "|-------|-------|" >> $GITHUB_STEP_SUMMARY
+          echo "| 🌐 Sitio | ${{ steps.deployment.outputs.page_url }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 📦 Commit | \`${{ github.sha }}\` |" >> $GITHUB_STEP_SUMMARY
+          echo "| 👤 Autor | ${{ github.actor }} |" >> $GITHUB_STEP_SUMMARY
+          echo "| 🕐 Fecha | $(date '+%Y-%m-%d %H:%M UTC') |" >> $GITHUB_STEP_SUMMARY
