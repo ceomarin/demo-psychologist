@@ -1,140 +1,123 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import { profesional } from "../config/profesional";
+import Navbar from "../components/Navbar.astro";
+import { profesional } from "../data/profesional";
+
+const fechaActualizacion = "2025-01-01";
 ---
 
-<Layout
-    title={`Política de Privacidad — ${profesional.nombre}`}
-    description="Política de privacidad y tratamiento de datos personales conforme a la Ley 21.719 de Chile."
->
-    <main class="max-w-3xl mx-auto px-6 py-20">
-        <a
-            href={import.meta.env.BASE_URL}
-            class="inline-flex items-center gap-2 text-sm mb-10 hover:opacity-70 transition-opacity"
-            style="color: #7C6BA0;"
-        >
-            <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                viewBox="0 0 24 24"
-            >
-                <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M15 19l-7-7 7-7"></path>
-            </svg>
-            Volver al inicio
-        </a>
-
-        <h1 class="text-3xl font-bold mb-2" style="color: #2D2535;">
-            Política de Privacidad
-        </h1>
-        <p class="text-sm mb-12" style="color: #9D93A8;">
-            Última actualización: enero 2025
-        </p>
-
-        <div class="flex flex-col gap-10" style="color: #4A4255;">
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    1. Responsable del tratamiento
-                </h2>
-                <p class="leading-relaxed">
-                    {profesional.nombre}, {profesional.titulo}, RUT {
-                        profesional.rutProfesional
-                    }, con domicilio en {profesional.direccion}. Correo de
-                    contacto:
-                    <a
-                        href={`mailto:${profesional.emailPrivacidad}`}
-                        class="underline"
-                        style="color: #7C6BA0;"
-                    >
-                        {profesional.emailPrivacidad}
-                    </a>
-                </p>
+<Layout title="Política de Privacidad" description={`Política de privacidad de ${profesional.nombre}, ${profesional.titulo}.`}>
+    <Navbar />
+    <main class="bg-white pt-24 pb-20">
+        <div class="max-w-3xl mx-auto px-6">
+            <!-- Encabezado -->
+            <div class="mb-12">
+                <a href="/demo-psychologist/" class="text-sm text-teal-700 hover:underline mb-6 inline-block">← Volver al inicio</a>
+                <h1 class="text-4xl font-bold text-gray-800 mb-4">Política de Privacidad</h1>
+                <p class="text-sm text-gray-400">Última actualización: {fechaActualizacion}</p>
             </div>
 
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    2. Datos que recopilamos
-                </h2>
-                <p class="leading-relaxed">
-                    A través del formulario de contacto recopilamos nombre,
-                    correo electrónico y el mensaje que nos envías. No
-                    recopilamos datos sensibles de salud a través de este
-                    formulario.
-                </p>
+            <!-- Contenido -->
+            <div class="flex flex-col gap-10 text-gray-600 leading-relaxed">
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">1. Responsable del tratamiento</h2>
+                    <p>El responsable del tratamiento de los datos personales recopilados a través de este sitio web es:</p>
+                    <ul class="mt-3 flex flex-col gap-1 text-sm">
+                        <li><strong>Nombre:</strong> {profesional.nombre}</li>
+                        <li><strong>Profesión:</strong> {profesional.titulo}</li>
+                        <li><strong>RUT:</strong> {profesional.rutProfesional}</li>
+                        <li><strong>Email de contacto:</strong> {profesional.emailPrivacidad}</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">2. Datos que recopilamos</h2>
+                    <p>Este sitio web puede recopilar los siguientes datos personales cuando usted se contacta voluntariamente:</p>
+                    <ul class="mt-3 list-disc list-inside flex flex-col gap-1 text-sm">
+                        <li>Nombre y apellido</li>
+                        <li>Dirección de correo electrónico</li>
+                        <li>Número de teléfono (vía WhatsApp)</li>
+                        <li>Información que usted comparta en sus mensajes de consulta</li>
+                    </ul>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">3. Finalidad del tratamiento</h2>
+                    <p>Los datos recopilados se utilizan exclusivamente para:</p>
+                    <ul class="mt-3 list-disc list-inside flex flex-col gap-1 text-sm">
+                        <li>Responder a sus consultas y solicitudes de información</li>
+                        <li>Coordinar y agendar sesiones terapéuticas</li>
+                        <li>Enviar información relacionada con los servicios contratados</li>
+                    </ul>
+                    <p class="mt-3 text-sm">
+                        Sus datos <strong>no serán utilizados con fines comerciales</strong> ni compartidos con terceros sin su consentimiento expreso.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">4. Base legal</h2>
+                    <p>
+                        El tratamiento de sus datos se realiza en conformidad con la
+                        <strong>Ley N° 19.628 sobre Protección de la Vida Privada</strong> de Chile y sus modificaciones vigentes. El consentimiento es otorgado por usted al iniciar voluntariamente el contacto a través de los medios disponibles en este sitio.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">5. Confidencialidad terapéutica</h2>
+                    <p>
+                        Toda información compartida en el contexto de una relación terapéutica está protegida por el <strong>secreto profesional</strong>, de acuerdo con el Código de Ética del Colegio de Psicólogos de Chile y la legislación vigente. Esta información no será divulgada a terceros salvo en los casos expresamente contemplados por la ley.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">6. Conservación de los datos</h2>
+                    <p>Los datos personales serán conservados únicamente durante el tiempo necesario para cumplir con la finalidad para la que fueron recopilados, o mientras exista una relación terapéutica activa, y posteriormente conforme a las obligaciones legales aplicables.</p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">7. Sus derechos</h2>
+                    <p>De acuerdo con la legislación chilena vigente, usted tiene derecho a:</p>
+                    <ul class="mt-3 list-disc list-inside flex flex-col gap-1 text-sm">
+                        <li>Acceder a sus datos personales</li>
+                        <li>Rectificar datos inexactos o incompletos</li>
+                        <li>Solicitar la eliminación de sus datos</li>
+                        <li>Oponerse al tratamiento de sus datos</li>
+                    </ul>
+                    <p class="mt-3 text-sm">
+                        Para ejercer cualquiera de estos derechos, puede contactarse a:
+                        <a href={`mailto:${profesional.emailPrivacidad}`} class="text-teal-700 hover:underline">
+                            {profesional.emailPrivacidad}
+                        </a>
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">8. Cookies y rastreo</h2>
+                    <p>
+                        Este sitio web <strong>no utiliza cookies de rastreo</strong> ni herramientas de análisis de comportamiento. Es un sitio estático que no recopila datos de navegación de forma automática.
+                    </p>
+                </section>
+
+                <section>
+                    <h2 class="text-xl font-semibold text-gray-800 mb-3">9. Cambios a esta política</h2>
+                    <p>Nos reservamos el derecho de actualizar esta política de privacidad cuando sea necesario. La fecha de última actualización se indica al inicio de este documento.</p>
+                </section>
             </div>
 
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    3. Finalidad del tratamiento
-                </h2>
-                <p class="leading-relaxed">
-                    Los datos recopilados se usan exclusivamente para responder
-                    tu consulta y, si corresponde, coordinar una sesión. No
-                    utilizamos tus datos para fines comerciales ni los cedemos a
-                    terceros.
-                </p>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    4. Base legal
-                </h2>
-                <p class="leading-relaxed">
-                    El tratamiento se realiza con tu consentimiento expreso al
-                    enviar el formulario de contacto, conforme a lo establecido
-                    en la Ley N° 21.719 sobre Protección de Datos Personales de
-                    Chile.
-                </p>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    5. Almacenamiento
-                </h2>
-                <p class="leading-relaxed">
-                    Los mensajes son recibidos a través de Web3Forms y
-                    almacenados en el correo del responsable. No mantenemos una
-                    base de datos propia de contactos.
-                </p>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    6. Tus derechos
-                </h2>
-                <p class="leading-relaxed">
-                    Conforme a la Ley 21.719, tienes derecho a acceder,
-                    rectificar, cancelar u oponerte al tratamiento de tus datos.
-                    Para ejercer estos derechos escríbenos a
-                    <a
-                        href={`mailto:${profesional.emailPrivacidad}`}
-                        class="underline"
-                        style="color: #7C6BA0;"
-                    >
-                        {profesional.emailPrivacidad}
-                    </a>.
-                </p>
-            </div>
-
-            <div>
-                <h2 class="text-xl font-semibold mb-3" style="color: #2D2535;">
-                    7. Cookies
-                </h2>
-                <p class="leading-relaxed">
-                    Este sitio no utiliza cookies de seguimiento ni herramientas
-                    de analítica de terceros.
-                </p>
+            <!-- Volver -->
+            <div class="mt-14 pt-8 border-t border-gray-100">
+                <a href="/demo-psychologist/" class="bg-teal-700 text-white px-8 py-3 rounded-full font-semibold hover:bg-teal-800 transition-colors inline-block">← Volver al inicio</a>
             </div>
         </div>
     </main>
 
-    <footer class="py-8 px-6 text-center" style="background-color: #2D2535;">
-        <p class="text-sm" style="color: #9D93A8;">
-            © 2025 {profesional.nombre} · {profesional.titulo} · Santiago de Chile
-        </p>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
+        <div class="max-w-5xl mx-auto px-6">
+            <p class="mb-2 text-white font-medium">{profesional.nombre} — {profesional.titulo}</p>
+            <p class="mt-4 text-xs text-gray-500">
+                © {new Date().getFullYear()} · Todos los derechos reservados
+            </p>
+        </div>
     </footer>
 </Layout>

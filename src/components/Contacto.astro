@@ -8,17 +8,15 @@ const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeU
 const esPresencial = profesional.modalidadAtencion === "presencial" || profesional.modalidadAtencion === "ambas";
 ---
 
-<section id="contacto" class="py-24 bg-white">
+<section id="contacto" data-testid="contacto" class="py-24 bg-white">
     <div class="max-w-5xl mx-auto px-6">
-        <!-- Encabezado -->
         <div class="text-center mb-14">
             <p class="text-teal-700 font-medium tracking-widest uppercase text-sm mb-3">Contacto</p>
-            <h2 class="text-4xl font-bold text-gray-800 leading-tight mb-4">¿Hablamos?</h2>
+            <h2 data-testid="contacto-titulo" class="text-4xl font-bold text-gray-800 leading-tight mb-4">¿Hablamos?</h2>
             <p class="text-gray-500 max-w-xl mx-auto">Estoy aquí para acompañarte. Escríbeme por cualquiera de estos medios y te respondo a la brevedad.</p>
         </div>
 
         <div class="grid md:grid-cols-2 gap-10 items-start">
-            <!-- Columna izquierda: canales de contacto -->
             <div class="flex flex-col gap-6">
                 <!-- WhatsApp -->
                 <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" data-testid="contacto-whatsapp" class="flex items-center gap-5 p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-opacity hover:opacity-90">
@@ -50,7 +48,7 @@ const esPresencial = profesional.modalidadAtencion === "presencial" || profesion
                     </div>
                 </a>
 
-                <!-- Ubicación (solo si es presencial o ambas) -->
+                <!-- Ubicación -->
                 {
                     esPresencial && (
                         <a href={googleMapsUrl} target="_blank" rel="noopener noreferrer" data-testid="contacto-ubicacion" class="flex items-center gap-5 p-6 rounded-2xl border border-gray-100 hover:shadow-lg transition-opacity hover:opacity-90">
@@ -70,7 +68,7 @@ const esPresencial = profesional.modalidadAtencion === "presencial" || profesion
                 }
             </div>
 
-            <!-- Columna derecha: CTA principal -->
+            <!-- CTA principal -->
             <div class="bg-teal-50 rounded-2xl p-8 flex flex-col items-center text-center gap-6">
                 <div class="text-5xl">🌿</div>
                 <h3 class="text-xl font-semibold text-gray-800">Da el primer paso</h3>
@@ -90,12 +88,13 @@ const esPresencial = profesional.modalidadAtencion === "presencial" || profesion
 </section>
 
 <!-- Footer -->
-<footer class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
+<footer data-testid="footer" class="bg-gray-800 text-gray-400 py-8 text-center text-sm">
     <div class="max-w-5xl mx-auto px-6">
         <p class="mb-2 text-white font-medium">{profesional.nombre} — {profesional.titulo}</p>
         <p>{profesional.ciudad}</p>
-        <p class="mt-4 text-xs text-gray-500">
-            © {new Date().getFullYear()} · Todos los derechos reservados
-        </p>
+        <div class="mt-4 flex justify-center gap-6 text-xs text-gray-500">
+            <span>© {new Date().getFullYear()} · Todos los derechos reservados</span>
+            <a data-testid="footer-link-privacidad" href="/demo-psychologist/privacidad" class="hover:text-gray-300 transition-colors underline">Política de privacidad</a>
+        </div>
     </div>
 </footer>
