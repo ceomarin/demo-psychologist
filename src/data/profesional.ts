@@ -7,7 +7,7 @@
 export const profesional = {
 
     // ── DATOS BÁSICOS ──────────────────────────────────────────
-    nombre: "Allison Feunsalida",
+    nombre: "Allison Fuenzalida",
     titulo: "Psicóloga Clínica",
     universidad: "Universidad Academia de Humanismo Cristiano",
     metodo: "Sistémico",
