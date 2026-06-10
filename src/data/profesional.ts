@@ -24,7 +24,7 @@ export const profesional = {
 
     // ── CONTACTO ───────────────────────────────────────────────
     email: "contacto@[dominio].cl",
-    whatsapp: "56937229880",         // sin +, sin espacios
+    whatsapp: "56994973202",         // sin +, sin espacios
     whatsappMensaje: "Hola, me gustaría agendar una consulta",
 
     // ── REDES SOCIALES ─────────────────────────────────────────
